@@ -4,7 +4,7 @@ public class AgenciaHttp {
     private String nome;
     private String cnpj;
     private String razaoSocial;
-    private SituacaoCadastralEnum situacaoCastral;
+    private SituacaoCadastralEnum situacaoCadastral;
 
     public String getNome() {
         return nome;
@@ -15,7 +15,7 @@ public class AgenciaHttp {
     public String getCnpj() {
         return cnpj;
     }
-    public SituacaoCadastralEnum getSituacaoCastral() {
-        return situacaoCastral;
+    public SituacaoCadastralEnum getSituacaoCadastral() {
+        return situacaoCadastral;
     }
 }

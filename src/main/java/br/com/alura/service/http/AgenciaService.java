@@ -22,7 +22,7 @@ public class AgenciaService {
     public void cadastrar(Agencia agencia) {
         AgenciaHttp agenciaHttp =
         situacaoCadastralHttpService.buscarPorCnpj(agencia.getCnpj());
-        if(agenciaHttp != null && agenciaHttp.getSituacaoCastral().equals(SituacaoCadastralEnum.ATIVO)){
+        if(agenciaHttp != null && agenciaHttp.getSituacaoCadastral().equals(SituacaoCadastralEnum.ATIVO)){
             agencias.add(agencia);
         }else {
             throw new AgenciaNaoAtivaOuNaoEncontradaException();
