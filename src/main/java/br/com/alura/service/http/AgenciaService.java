@@ -35,8 +35,22 @@ public class AgenciaService {
     public void deletar(Long id) {
         agenciaRepository.deleteById(id);
     }
-    public void alterar(Agencia agencia){
-        agenciaRepository.update("nome =?1, razaoSocial = ?2, cnpj = ?3 where id = ?4", agencia.getNome(), agencia.getRazaoSocial(), agencia.getCnpj(), agencia.getId());
+    // public void alterar(Agencia agencia){
+    //     agenciaRepository.update("nome =?1, razaoSocial = ?2, cnpj = ?3 where id = ?4", agencia.getNome(), agencia.getRazaoSocial(), agencia.getCnpj(), agencia.getId());
+    // }
+    public void alterar(Agencia agencia) {
+    // Busca a entidade pelo ID
+    Agencia entidadeExistente = agenciaRepository.findById(agencia.getId().longValue());
+    
+    if (entidadeExistente != null) {
+        // Atualiza os atributos desejados
+        entidadeExistente.setNome(agencia.getNome());
+        entidadeExistente.setRazaoSocial(agencia.getRazaoSocial());
+        entidadeExistente.setCnpj(agencia.getCnpj());
+        entidadeExistente.setEndereco(agencia.getEndereco());
+    } else {
+        throw new IllegalStateException("Agência com ID " + agencia.getId() + " não encontrada");
     }
+}
 
 }

@@ -38,4 +38,16 @@ public class Agencia {
     public Endereco getEndereco() {
         return endereco;
     }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }
