@@ -1,7 +1,11 @@
-package br.com.alura.service.http;
+package br.com.alura.service;
 import br.com.alura.domain.Agencia;
 import br.com.alura.exceptions.AgenciaNaoAtivaOuNaoEncontradaException;
 import br.com.alura.repository.AgenciaRepository;
+import br.com.alura.service.http.AgenciaHttp;
+import br.com.alura.service.http.SituacaoCadastralEnum;
+import br.com.alura.service.http.SituacaoCadastralHttpService;
+
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
