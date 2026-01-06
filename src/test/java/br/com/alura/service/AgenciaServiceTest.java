@@ -48,7 +48,7 @@ public class AgenciaServiceTest {
     // Executa
     agenciaService.cadastrar(agencia);
 
-    // Verifica que persist foi chamado com qualquer Agencia
+    // Verifica que persist foi chamado
     Mockito.verify(agenciaRepository).persist(agencia);
 }
 

@@ -1,0 +1,6 @@
+scrape_configs:
+  - job_name: 'banking-service-app' #a vontade
+    scrape_interval: 5s #a cada quanto tempo o prometheus vai bater no /metrics
+    metrics_path: '/metrics' 
+    static_configs:
+      - targets: ['host.docker.internal:8080'] #hos da aplicacao para o prometheus acessar
