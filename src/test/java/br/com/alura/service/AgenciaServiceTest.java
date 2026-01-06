@@ -9,6 +9,7 @@ import br.com.alura.domain.Agencia;
 import br.com.alura.domain.Endereco;
 import br.com.alura.exceptions.AgenciaNaoAtivaOuNaoEncontradaException;
 import br.com.alura.repository.AgenciaRepository;
+import br.com.alura.service.http.AgenciaHttp;
 import br.com.alura.service.http.SituacaoCadastralHttpService;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
@@ -36,8 +37,28 @@ public class AgenciaServiceTest {
 
         Mockito.verify(agenciaRepository, Mockito.never()).persist(criarAgencia());
     }
+
+    @Test
+    public void deveCadastrarQuandoClientRetornarSituacaoCadastralAtiva() {
+    Agencia agencia = criarAgencia();
+
+    // Mock retornando situação ativa
+    Mockito.when(situacaoCadastralHttpService.buscarPorCnpj("123"))
+           .thenReturn(criarAgenciaHttp());
+
+    // Executa
+    agenciaService.cadastrar(agencia);
+
+    // Verifica que persist foi chamado com qualquer Agencia
+    Mockito.verify(agenciaRepository).persist(agencia);
+}
+
+    private AgenciaHttp criarAgenciaHttp() {
+        return new AgenciaHttp("Agencia Test","Agencia Test", "123",  "ATIVO");
+    }
+
     private Agencia criarAgencia(){
-            Endereco endereco = new Endereco(1, "", "", "", null);
-            return new Agencia(1, "","","",endereco);
+            Endereco endereco = new Endereco(1, "Rua 1", "teste", "teste", 1);
+            return new Agencia(1, "Agencia Test", "Agencia Test", "123",endereco);
         }
 }
