@@ -5,6 +5,7 @@ import br.com.alura.repository.AgenciaRepository;
 import br.com.alura.service.http.AgenciaHttp;
 import br.com.alura.service.http.SituacaoCadastralEnum;
 import br.com.alura.service.http.SituacaoCadastralHttpService;
+import io.quarkus.logging.Log;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -28,6 +29,7 @@ public class AgenciaService {
         situacaoCadastralHttpService.buscarPorCnpj(agencia.getCnpj());
         if(agenciaHttp != null && agenciaHttp.getSituacaoCadastral().equals(SituacaoCadastralEnum.ATIVO)){
             agenciaRepository.persist(agencia);
+            Log.info("A agencia com o CNPJ "+ agencia.getCnpj() + "foi cadastrada");
         }else {
             throw new AgenciaNaoAtivaOuNaoEncontradaException();
         }
@@ -38,20 +40,17 @@ public class AgenciaService {
     }
     public void deletar(Long id) {
         agenciaRepository.deleteById(id);
+        Log.info("A agencia com o ID "+ id + " foi deletada");
     }
-    // public void alterar(Agencia agencia){
-    //     agenciaRepository.update("nome =?1, razaoSocial = ?2, cnpj = ?3 where id = ?4", agencia.getNome(), agencia.getRazaoSocial(), agencia.getCnpj(), agencia.getId());
-    // }
     public void alterar(Agencia agencia) {
-    // Busca a entidade pelo ID
     Agencia entidadeExistente = agenciaRepository.findById(agencia.getId().longValue());
     
     if (entidadeExistente != null) {
-        // Atualiza os atributos desejados
         entidadeExistente.setNome(agencia.getNome());
         entidadeExistente.setRazaoSocial(agencia.getRazaoSocial());
         entidadeExistente.setCnpj(agencia.getCnpj());
         entidadeExistente.setEndereco(agencia.getEndereco());
+        Log.info("A agencia de ID "+ agencia.getId() + " foi alterada");
     } else {
         throw new IllegalStateException("Agência com ID " + agencia.getId() + " não encontrada");
     }
